@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard | BloodCare</title>
+
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; color: #333; }
+header { background: #b51224; color: #fff; padding: 18px 4%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+header a { color: #fff; }
+main { max-width: 1400px; margin: 25px auto; padding: 0 18px; }
+.panel { background: white; border-radius: 12px; padding: 22px; margin-bottom: 24px; box-shadow: 0 3px 14px #0000000b; }
+h1, h2 { color: #b51224; }
+header h1 { color: white; margin: 0; font-size: 23px; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 850px; }
+th, td { padding: 9px; border: 1px solid #ddd; text-align: left; font-size: 13px; vertical-align: top; }
+th { background: #fff0f1; }
+select, input, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 5px; max-width: 160px; }
+button { padding: 8px 10px; background: #b51224; color: white; border: 0; border-radius: 5px; cursor: pointer; }
+button:hover { background: #8f0e1c; }
+.delete-btn { background: #b51224; white-space: nowrap; }
+.small-form { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.quick { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+.quick a { color: #b51224; }
+.note { background: #fff5e6; padding: 12px; border-radius: 7px; line-height: 1.5; }
+.message-cell { min-width: 250px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.status-new { display: inline-block; background: #fff0f1; color: #b51224; padding: 5px 8px; border-radius: 5px; font-weight: bold; }
+.availability-form { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; min-width: 210px; }
+.availability-form select { max-width: 135px; }
+.email-cell { overflow-wrap: anywhere; min-width: 170px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>BloodCare NGO — Admin Dashboard</h1>
+    <div>
+        Signed in: {{ admin_username }}
+        &nbsp; | &nbsp;
+        <a href="/admin-logout">Logout</a>
+    </div>
+</header>
+
+<main>
+<div class="quick">
+    <a href="#donors">Manage Donors</a>
+    <a href="#requests">Manage Requests</a>
+    <a href="#enquiries">Contact Enquiries</a>
+    <a href="#donations">Donation Records</a>
+</div>
+
+<!-- REGISTERED DONORS -->
+<section class="panel" id="donors">
+    <h2>Registered Donors ({{ donors|length }})</h2>
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Blood group</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Availability</th>
+                <th>Update</th>
+            </tr>
+            {% for d in donors %}
+            <tr>
+                <td>{{ d.donor_id }}</td>
+                <td>{{ d.full_name }}</td>
+                <td>{{ d.blood_group }}</td>
+                <td>{{ d.age }}</td>
+                <td>{{ d.gender or "—" }}</td>
+                <td>{{ d.city }}</td>
+                <td>{{ d.phone }}</td>
+                <td class="email-cell">{{ d.email }}</td>
+                <td>{{ d.availability or "Pending" }}</td>
+                <td>
+                    <form class="availability-form" method="POST" action="/admin/update-donor">
+                        <input type="hidden" name="donor_id" value="{{ d.donor_id }}">
+                        <select name="availability" aria-label="Availability for {{ d.full_name }}" required>
+                            <option value="Available" {% if d.availability == "Available" %}selected{% endif %}>Available</option>
+                            <option value="Unavailable" {% if d.availability == "Unavailable" %}selected{% endif %}>Unavailable</option>
+                            <option value="Pending" {% if d.availability == "Pending" %}selected{% endif %}>Pending</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="10">No registered donors found.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<!-- BLOOD REQUESTS -->
+<section class="panel" id="requests">
+    <h2>Blood Requests ({{ requests|length }})</h2>
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>ID</th><th>Patient</th><th>Gender</th><th>Blood group</th><th>Units</th><th>City</th><th>Contact</th><th>Needed by</th><th>Requester</th><th>Status</th><th>Delete</th>
+            </tr>
+            {% for r in requests %}
+            <tr{% if r.needs_followup %} style="background:#fff0f0; outline:2px solid #c62828; outline-offset:-2px;"{% endif %}>
+                <td>{{ r.request_id }}{% if r.needs_followup %}<br><strong style="color:#b51224">Follow up needed (&gt;6h)</strong>{% endif %}</td>
+                <td>{{ r.patient_name }}</td><td>{{ r.patient_gender or "—" }}</td><td>{{ r.blood_group }}</td><td>{{ r.units }}</td><td>{{ r.city }}</td>
+                <td>{{ r.contact_phone }}<br>{{ r.email }}</td>
+                <td>{{ r.needed_by }}</td><td>{{ r.requester }}</td>
+                <td><span class="status-{{ r.status|lower|replace(' ', '-') }}">{{ r.status }}</span></td>
+                <td>
+                    <form method="POST" action="/admin/delete-request" onsubmit="return confirm('Are you sure you want to delete blood request #{{ r.request_id }}? This action cannot be undone.');">
+                        <input type="hidden" name="request_id" value="{{ r.request_id }}">
+                        <button type="submit" class="delete-btn">Delete Request</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="11">No blood requests found.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+<!-- CONTACT ENQUIRIES -->
+<section class="panel" id="enquiries">
+<h2>Contact Enquiries ({{ enquiries|length }})</h2>
+<div class="table-wrap"><table>
+<tr><th>Enquiry ID</th><th>Name</th><th>Email</th><th>Message</th><th>Submitted At</th><th>Status</th></tr>
+{% for e in enquiries %}
+<tr><td>{{ e.enquiry_id }}</td><td>{{ e.name }}</td><td>{{ e.email }}</td><td class="message-cell">{{ e.message }}</td><td>{{ e.submitted_at }}</td>
+
+<td>
+    <form method="POST" action="/admin/update-enquiry-status"
+          class="small-form">
+        <input type="hidden" name="enquiry_id"
+               value="{{ e.enquiry_id }}">
+
+        <select name="status">
+            <option value="New / Unreviewed"
+                {% if e.status in ['New', 'New / Unreviewed', 'Unreviewed'] %}selected{% endif %}>
+                New / Unreviewed
+            </option>
+            <option value="Reviewed"
+                {% if e.status == 'Reviewed' %}selected{% endif %}>
+                Reviewed
+            </option>
+        </select>
+
+        <button type="submit">Update Status</button>
+    </form>
+</td>
+</tr>
+{% else %}
+<tr><td colspan="6">No contact enquiries received yet.</td></tr>
+{% endfor %}
+</table></div>
+</section>
+
+<!-- DONATION RECORDS -->
+<section class="panel" id="donations">
+<h2>Record a Donation</h2>
+<p>Use only for a donation confirmed by the blood bank/NGO. Completed records update donor history.</p>
+<form class="small-form" method="post" action="/admin/record-donation">
+    <label>Donor ID <input type="number" name="donor_id" min="1" required></label>
+    <label>Date <input type="date" name="donation_date" required></label>
+    <label>Status <select name="status"><option>Pending</option><option>Completed</option><option>Cancelled</option></select></label>
+    <label>Notes <input name="notes" maxlength="255"></label>
+    <button type="submit">Save Donation</button>
+</form>
+<h2>Recent Donation Records</h2>
+<div class="table-wrap"><table>
+<tr><th>Donation ID</th><th>Donor ID</th><th>Name</th><th>Blood group</th><th>City</th><th>Date</th><th>Status</th><th>Notes</th></tr>
+{% for dn in donations %}
+<tr><td>{{ dn.donation_id }}</td><td>{{ dn.donor_id }}</td><td>{{ dn.full_name }}</td><td>{{ dn.blood_group }}</td><td>{{ dn.city }}</td><td>{{ dn.donation_date }}</td><td>{{ dn.status }}</td><td>{{ dn.notes or "—" }}</td></tr>
+{% else %}
+<tr><td colspan="8">No donation records found.</td></tr>
+{% endfor %}
+</table></div>
+</section>
+</main>
+</body>
+</html>

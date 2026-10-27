@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Donor Dashboard | BloodCare</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f7f7;color:#333;font-family:Arial,sans-serif}header{background:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0001}.logo{font-size:25px;font-weight:bold;color:#c62828;text-decoration:none}.logout,.btn{background:#c62828;color:#fff;text-decoration:none;padding:10px 16px;border:0;border-radius:7px;cursor:pointer}.container{max-width:1100px;margin:30px auto;padding:0 18px}.welcome{background:#c62828;color:white;padding:28px;border-radius:14px;margin-bottom:20px}.welcome h1{margin-top:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.panel{background:white;padding:22px;border-radius:12px;box-shadow:0 3px 15px #00000008;margin-bottom:20px}.card h3{font-size:14px;color:#666}.card p{font-size:22px;font-weight:bold;color:#c62828}.panel h2{color:#b51224}.row{padding:10px 0;border-bottom:1px solid #eee;line-height:1.5}.actions{display:flex;gap:12px;flex-wrap:wrap}.actions a{display:inline-block;padding:12px 16px;border:1px solid #c62828;border-radius:7px;text-decoration:none;color:#b51224;font-weight:bold}table{border-collapse:collapse;width:100%;margin-top:12px}td,th{padding:10px;border:1px solid #ddd;text-align:left;font-size:14px}th{background:#fff0f1}@media(max-width:650px){.grid{grid-template-columns:1fr}.panel{overflow-x:auto}}
+</style></head><body>
+<header><a href="/index.html" class="logo">BloodCare</a><a href="/logout" class="logout">Logout</a></header>
+<main class="container">
+<section class="welcome"><h1>Welcome, {{ donor.full_name }}!</h1><p><strong>Donor ID:</strong> {{ ("BC-D-%06d"|format(donor.donor_id)) if donor.donor_id else "Not assigned — complete your donor profile" }}</p><p>Thank you for being part of BloodCare.</p></section>
+<section class="grid">
+<div class="card"><h3>My Blood Group</h3><p>{{ donor.blood_group or "Not added" }}</p></div>
+<div class="card"><h3>Availability</h3><p>{{ donor.availability or "Pending" }}</p></div>
+<div class="card"><h3>Total Recorded Donations</h3><p>{{ total_donations }}</p></div>
+<div class="card"><h3>Last Completed Donation</h3><p>{{ last_donation_date }}</p></div>
+<div class="card"><h3>Next Estimated Eligible Date</h3><p>{{ next_eligible_date }}</p></div>
+</section>
+<section class="panel"><h2>My Profile</h2>
+<div class="row"><strong>Full Name:</strong> {{ donor.full_name }}</div><div class="row"><strong>Age:</strong> {{ donor.age or "Not added" }}</div>
+<div class="row"><strong>Gender:</strong> {{ donor.gender or "Not added" }}</div><div class="row"><strong>City:</strong> {{ donor.donor_city or "Not added" }}</div>
+<div class="row"><strong>Phone:</strong> {{ donor.phone }}</div><div class="row"><strong>Email:</strong> {{ donor.email }}</div></section>
+<section class="panel"><h2>Quick Actions</h2><div class="actions"><a href="/donor.html">Add / Update Donor Profile</a></div>
+<p>Donation is very important for every person. You can exercise it after every 90 days of previos donation.</p></section>
+<section class="panel"><h2>My Blood Requests</h2>
+{% if my_requests %}<table><tr><th>Request #</th><th>Requestor Name</th><th>Email</th><th>Phone Number</th><th>Blood Group</th><th>Units</th><th>City</th><th>Required By</th><th>Status</th></tr>{% for r in my_requests %}<tr><td>{{ r.request_id }}</td><td>{{ r.requester_name or "Not provided" }}</td><td>{% if r.requester_email %}<a href="mailto:{{ r.requester_email }}">{{ r.requester_email }}</a>{% else %}Not provided{% endif %}</td><td>{% if r.requester_phone %}<a href="tel:{{ r.requester_phone }}">{{ r.requester_phone }}</a>{% else %}Not provided{% endif %}</td><td>{{ r.blood_group }}</td><td>{{ r.units }}</td><td>{{ r.city }}</td><td>{{ r.needed_by }}</td><td>{{ r.status }}</td></tr>{% endfor %}</table>{% else %}<p>No blood requests are currently assigned to your donor profile.</p>{% endif %}
+</section></main></body></html>

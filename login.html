@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BloodCare</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f7f7f9;
+            color: #252525;
+        }
+
+        .login-hero {
+            background: linear-gradient(120deg, #8f101c, #d82936);
+            padding: 45px 20px 85px;
+            text-align: center;
+            color: white;
+        }
+
+        .login-hero .eyebrow {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .login-hero h1 {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        .login-hero p {
+            font-size: 14px;
+            color: #ffe8e9;
+        }
+
+        .login-card {
+            width: min(440px, 92%);
+            margin: -45px auto 55px;
+            padding: 35px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 38px rgba(0,0,0,0.10);
+        }
+
+        .login-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background: #fff0f1;
+            color: #c91f2b;
+            font-size: 28px;
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 27px;
+        }
+
+        .login-heading h2 {
+            font-size: 24px;
+            margin: 0 0 8px;
+        }
+
+        .login-heading p {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 13px 42px;
+            border: 1px solid #e0e0e0;
+            border-radius: 7px;
+            outline: none;
+            background: #fcfcfc;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .input-box input:focus {
+            border-color: #c91f2b;
+            background: white;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0 23px;
+            font-size: 11px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+        }
+
+        .remember input {
+            accent-color: #c91f2b;
+        }
+
+        .form-options a,
+        .register-note a {
+            color: #c91f2b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            background: #c91f2b;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #a91520;
+        }
+
+        #loginMessage {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 13px;
+        }
+
+        .register-note {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 23px;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            text-decoration: none;
+            margin-top: 22px;
+        }
+
+        .page-footer {
+            background: #211c1d;
+            color: #ddd;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        .page-footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 27px 20px;
+            }
+
+            .login-hero h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            Blood<span class="red-text">Care</span>
+        </a>
+
+        <a href="index.html" class="nav-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+    </header>
+
+    <section class="login-hero">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h1>Login to BloodCare</h1>
+        <p>Your journey to making a difference continues here.</p>
+    </section>
+
+    <main class="login-card">
+
+        <div class="login-icon">
+            <i class="fa-solid fa-user-shield"></i>
+        </div>
+
+        <div class="login-heading">
+            <h2>Welcome Back!</h2>
+            <p>Enter your account details to continue.</p>
+        </div>
+
+        <form id="loginForm" action="/login" method="POST">
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" name="email"
+       placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" name="password"
+       placeholder="Enter your password" required>
+                </div>
+            </div>
+
+            <div class="form-options">
+                <label class="remember">
+                    <input type="checkbox" id="remember">
+                    Remember me
+                </label>
+
+                <a href="#" id="forgotLink">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Sign In <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p id="loginMessage" role="status"></p>
+
+        </form>
+
+        <p class="register-note">
+            Don't have an account?
+            <a href="register.html">Create Account</a>
+        </p>
+
+        <a href="index.html" class="back-home">
+            <i class="fa-solid fa-house"></i> Back to Home
+        </a>
+
+    </main>
+
+    <footer class="page-footer">
+        © 2026 BloodCare. Every drop carries hope.
+    </footer>
+
+    
+<script>
+    document.getElementById("forgotLink").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        document.getElementById("loginMessage").style.color = "#c91f2b";
+        document.getElementById("loginMessage").textContent =
+            "Password recovery is not available yet.";
+    });
+</script>
+
+</body>
+</html>

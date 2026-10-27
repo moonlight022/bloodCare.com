@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thalassemia Awareness | BloodCare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #292929;
+            background: #f7f7f9;
+            line-height: 1.8;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .brand {
+            color: #222;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #c91f2b;
+        }
+
+        .back-home {
+            color: #c91f2b;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #7e101a, #d82936);
+            color: white;
+            padding: 75px 20px;
+            text-align: center;
+        }
+
+        .hero .eyebrow {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 4vw, 43px);
+            line-height: 1.3;
+            margin: 12px 0;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #ffe8e9;
+            font-size: 14px;
+        }
+
+        .page-layout {
+            max-width: 1160px;
+            margin: 40px auto;
+            padding: 0 22px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .contents {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 20px;
+        }
+
+        .contents h3 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+
+        .contents a {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            text-decoration: none;
+            padding: 7px 0;
+        }
+
+        .contents a:hover {
+            color: #c91f2b;
+        }
+
+        .article {
+            min-width: 0;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.045);
+            scroll-margin-top: 20px;
+        }
+
+        .info-card h2 {
+            color: #bd1e2b;
+            font-size: 23px;
+            line-height: 1.4;
+            margin: 0 0 15px;
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            margin: 22px 0 8px;
+        }
+
+        .info-card p,
+        .info-card li {
+            color: #626262;
+            font-size: 13px;
+        }
+
+        .info-card ul,
+        .info-card ol {
+            padding-left: 22px;
+        }
+
+        .highlight {
+            background: #fff0f1;
+            border-left: 4px solid #c91f2b;
+            padding: 16px 18px;
+            margin: 18px 0;
+            border-radius: 5px;
+            color: #63343a;
+            font-size: 13px;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        .topic-card {
+            background: #fff5f5;
+            border: 1px solid #ffe0e2;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .topic-card i {
+            color: #c91f2b;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .topic-card h3 {
+            margin: 5px 0;
+        }
+
+        .topic-card p {
+            margin-bottom: 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 14px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            margin: 0 0 6px;
+        }
+
+        .faq-item p {
+            margin: 0;
+        }
+
+        .page-button {
+            display: inline-block;
+            background: #c91f2b;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .page-button:hover {
+            background: #a91520;
+        }
+
+        .disclaimer {
+            font-size: 11px !important;
+            color: #777 !important;
+        }
+
+        footer {
+            background: #211c1d;
+            color: #ddd;
+            text-align: center;
+            padding: 23px 15px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .contents {
+                position: static;
+            }
+
+            .contents nav {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 4px 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .topbar {
+                padding: 15px 5%;
+            }
+
+            .brand {
+                font-size: 22px;
+            }
+
+            .back-home {
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 55px 18px;
+            }
+
+            .info-card {
+                padding: 22px 18px;
+            }
+
+            .info-card h2 {
+                font-size: 20px;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contents nav {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <a href="index.html" class="brand">
+            Blood<span>Care</span>
+        </a>
+
+        <a href="index.html#awareness" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <p class="eyebrow">KNOWLEDGE • AWARENESS • SUPPORT</p>
+
+        <h1>Understanding Thalassemia</h1>
+
+        <p>
+            Learn about this inherited blood disorder, the importance of
+            medical care, and how voluntary blood donation can support
+            people who need regular transfusions.
+        </p>
+    </section>
+
+    <main class="page-layout">
+
+        <!-- TABLE OF CONTENTS -->
+        <aside class="contents">
+            <h3><i class="fa-solid fa-list"></i> On This Page</h3>
+
+            <nav>
+                <a href="#introduction">What Is Thalassemia?</a>
+                <a href="#causes">Causes and Inheritance</a>
+                <a href="#types">Types of Thalassemia</a>
+                <a href="#symptoms">Signs and Symptoms</a>
+                <a href="#diagnosis">Diagnosis</a>
+                <a href="#treatment">Treatment and Care</a>
+                <a href="#transfusion">Blood Transfusions</a>
+                <a href="#donation">Role of Blood Donation</a>
+                <a href="#prevention">Screening and Prevention</a>
+                <a href="#living">Living With Thalassemia</a>
+                <a href="#faq">Frequently Asked Questions</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN INFORMATION -->
+        <div class="article">
+
+            <section class="info-card" id="introduction">
+                <h2>1. What Is Thalassemia?</h2>
+
+                <p>
+                    Thalassemia is an inherited blood disorder that affects
+                    the body's ability to produce haemoglobin. Haemoglobin
+                    is a protein in red blood cells that carries oxygen
+                    from the lungs to the rest of the body.
+                </p>
+
+                <p>
+                    When the body does not produce enough healthy
+                    haemoglobin, it may produce fewer healthy red blood
+                    cells. This can lead to anaemia, which means the body
+                    has difficulty supplying enough oxygen to its tissues.
+                </p>
+
+                <p>
+                    Thalassemia varies in severity. Some people have few
+                    or no symptoms, while others need regular medical
+                    monitoring and specialised treatment throughout life.
+                </p>
+
+                <div class="highlight">
+                    Thalassemia is inherited. It is not contagious and
+                    cannot spread from one person to another through
+                    everyday contact.
+                </div>
+            </section>
+
+            <section class="info-card" id="causes">
+                <h2>2. Causes and Inheritance</h2>
+
+                <p>
+                    Thalassemia is caused by changes in genes involved
+                    in making haemoglobin. These genetic changes are
+                    passed from parents to children.
+                </p>
+
+                <p>
+                    A person may inherit a thalassemia-related gene change
+                    from one parent and become a carrier. Carriers often
+                    have no symptoms or may have mild anaemia. A carrier
+                    can pass the gene change to their children.
+                </p>
+
+                <p>
+                    The chance of a child having a more severe form
+                    depends on the specific gene changes carried by both
+                    parents. Genetic counselling and appropriate testing
+                    can help families understand their individual risks.
+                </p>
+            </section>
+
+            <section class="info-card" id="types">
+                <h2>3. Types of Thalassemia</h2>
+
+                <p>
+                    The two main groups are alpha thalassemia and beta
+                    thalassemia. The type and severity depend on which
+                    haemoglobin genes are affected.
+                </p>
+
+                <div class="topic-grid">
+                    <div class="topic-card">
+                        <i class="fa-solid fa-dna"></i>
+                        <h3>Alpha Thalassemia</h3>
+                        <p>
+                            Occurs when changes affect genes responsible
+                            for producing alpha-globin, a component of
+                            haemoglobin. Severity ranges from a carrier
+                            state to serious disease.
+                        </p>
+                    </div>
+
+                    <div class="topic-card">
+                        <i class="fa-solid fa-droplet"></i>
+                        <h3>Beta Thalassemia</h3>
+                        <p>
+                            Occurs when changes affect genes responsible
+                            for producing beta-globin. It can range from
+                            a mild carrier state to a severe condition
+                            requiring regular treatment.
+                        </p>
+                    </div>
+                </div>
+
+                <h3>Common severity categories</h3>
+
+                <ul>
+                    <li>
+                        <strong>Thalassemia trait or minor:</strong>
+                        Often causes no symptoms or only mild anaemia.
+                    </li>
+                    <li>
+                        <strong>Thalassemia intermedia:</strong>
+                        May cause moderate symptoms and require
+                        treatment depending on the individual.
+                    </li>
+                    <li>
+                        <strong>Thalassemia major:</strong>
+                        A severe form that commonly requires regular
+                        blood transfusions and specialist care.
+                    </li>
+                </ul>
+
+                <p>
+                    These terms are commonly used for beta thalassemia.
+                    A clinician determines the exact diagnosis and
+                    severity using appropriate tests.
+                </p>
+            </section>
+
+            <section class="info-card" id="symptoms">
+                <h2>4. Signs and Symptoms</h2>
+
+                <p>
+                    Symptoms depend on the type and severity of
+                    thalassemia. Some carriers feel well and may discover
+                    their carrier status only during a blood test.
+                </p>
+
+                <h3>Possible signs include:</h3>
+
+                <ul>
+                    <li>Feeling tired or weak.</li>
+                    <li>Pale or yellowish skin.</li>
+                    <li>Shortness of breath, particularly with activity.</li>
+                    <li>Slow growth in children with more severe disease.</li>
+                    <li>Changes in the spleen or other organs in some cases.</li>
+                    <li>Bone changes in certain severe, untreated cases.</li>
+                </ul>
+
+                <div class="highlight">
+                    These symptoms can have many causes. They do not
+                    confirm thalassemia on their own. Medical evaluation
+                    and appropriate blood tests are needed.
+                </div>
+            </section>
+
+            <section class="info-card" id="diagnosis">
+                <h2>5. How Is Thalassemia Diagnosed?</h2>
+
+                <p>
+                    Healthcare professionals use medical history,
+                    examination and laboratory tests to identify
+                    thalassemia and determine its type.
+                </p>
+
+                <ul>
+                    <li>
+                        <strong>Complete blood count (CBC):</strong>
+                        Measures red blood cell characteristics and
+                        helps identify patterns associated with anaemia.
+                    </li>
+                    <li>
+                        <strong>Haemoglobin analysis:</strong>
+                        Tests such as haemoglobin electrophoresis or
+                        high-performance liquid chromatography (HPLC)
+                        help identify haemoglobin patterns.
+                    </li>
+                    <li>
+                        <strong>Genetic testing:</strong>
+                        May be recommended to identify specific
+                        gene changes.
+                    </li>
+                    <li>
+                        <strong>Family screening:</strong>
+                        May help identify carrier status when
+                        recommended by a healthcare professional.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card" id="treatment">
+                <h2>6. Treatment and Medical Care</h2>
+
+                <p>
+                    Treatment depends on the type and severity of
+                    thalassemia. People with mild forms may need only
+                    periodic monitoring, while more severe forms need
+                    ongoing care from a specialist.
+                </p>
+
+                <h3>Possible treatments include:</h3>
+
+                <ul>
+                    <li>
+                        <strong>Blood transfusions:</strong>
+                        Replace red blood cells when clinically needed.
+                    </li>
+                    <li>
+                        <strong>Iron chelation therapy:</strong>
+                        Helps remove excess iron that can build up
+                        after repeated transfusions.
+                    </li>
+                    <li>
+                        <strong>Monitoring:</strong>
+                        Regular tests help healthcare teams monitor
+                        blood counts, iron levels and organ health.
+                    </li>
+                    <li>
+                        <strong>Specialist treatment:</strong>
+                        Some patients may be eligible for stem cell
+                        transplantation or other advanced therapies.
+                    </li>
+                </ul>
+
+                <p>
+                    Treatment plans are individualised. Patients should
+                    not start iron supplements or change prescribed
+                    treatment without medical advice.
+                </p>
+            </section>
+
+            <section class="info-card" id="transfusion">
+                <h2>7. Why Are Blood Transfusions Important?</h2>
+
+                <p>
+                    Some people with severe thalassemia cannot produce
+                    enough healthy red blood cells to meet the body's
+                    needs. Regular transfusions can help maintain
+                    haemoglobin levels and support normal growth,
+                    activity and overall health.
+                </p>
+
+                <p>
+                    Transfusions must be arranged and monitored by
+                    qualified healthcare professionals. Blood is
+                    carefully tested and matched to reduce the risk
+                    of complications.
+                </p>
+
+                <div class="highlight">
+                    Not everyone with thalassemia needs regular
+                    transfusions. The decision depends on the person's
+                    diagnosis and medical condition.
+                </div>
+            </section>
+
+            <section class="info-card" id="donation">
+                <h2>8. The Role of Blood Donation</h2>
+
+                <p>
+                    Voluntary blood donors help maintain a safe and
+                    reliable blood supply for patients who need
+                    transfusions, including some people living with
+                    thalassemia.
+                </p>
+
+                <h3>How can donors help?</h3>
+
+                <ul>
+                    <li>Participate in authorised blood donation drives.</li>
+                    <li>Encourage accurate information about donation.</li>
+                    <li>Follow the instructions of qualified blood-bank staff.</li>
+                    <li>Support awareness activities in schools and communities.</li>
+                    <li>Help reduce myths and stigma around blood donation.</li>
+                </ul>
+
+                <p>
+                    Every donation must meet blood-bank safety
+                    requirements. Eligibility is assessed by trained
+                    staff, and blood is tested before it is used.
+                </p>
+
+                <a href="register.html" class="page-button">
+                    <i class="fa-solid fa-heart"></i> Join BloodCare
+                </a>
+            </section>
+
+            <section class="info-card" id="prevention">
+                <h2>9. Screening and Prevention</h2>
+
+                <p>
+                    Because thalassemia is inherited, it cannot be
+                    prevented in the same way as an infectious disease.
+                    However, awareness and carrier screening can help
+                    people understand their genetic status and make
+                    informed family-planning decisions.
+                </p>
+
+                <ul>
+                    <li>Seek medical advice about carrier screening.</li>
+                    <li>Consider genetic counselling when recommended.</li>
+                    <li>Discuss test results with a qualified clinician.</li>
+                    <li>Learn about available screening options in your area.</li>
+                </ul>
+
+                <p>
+                    Screening recommendations vary according to personal
+                    and family history and local medical guidance.
+                </p>
+            </section>
+
+            <section class="info-card" id="living">
+                <h2>10. Living With Thalassemia</h2>
+
+                <p>
+                    People living with thalassemia can benefit from
+                    consistent medical care, clear information and
+                    emotional support. Their needs differ depending on
+                    the type and severity of their condition.
+                </p>
+
+                <ul>
+                    <li>Attend recommended medical appointments.</li>
+                    <li>Follow the treatment plan provided by the care team.</li>
+                    <li>Discuss fatigue or new symptoms with a clinician.</li>
+                    <li>Seek support from family, counsellors or patient groups.</li>
+                    <li>Use reliable medical sources to learn about the condition.</li>
+                </ul>
+            </section>
+
+            <section class="info-card" id="faq">
+                <h2>11. Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>Is thalassemia contagious?</h3>
+                    <p>
+                        No. It is an inherited genetic condition and
+                        does not spread through touching, sharing food
+                        or everyday contact.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Can a person with thalassemia donate blood?</h3>
+                    <p>
+                        Eligibility depends on the person's condition,
+                        haemoglobin level and applicable blood-bank
+                        rules. The blood-bank medical team makes the
+                        final decision.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Does every patient need blood transfusions?</h3>
+                    <p>
+                        No. Some people have mild forms and need only
+                        monitoring, while others require regular
+                        transfusions.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Can thalassemia be diagnosed with one symptom?</h3>
+                    <p>
+                        No. Diagnosis requires appropriate medical
+                        assessment and laboratory testing.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Why is awareness important?</h3>
+                    <p>
+                        Awareness can encourage timely diagnosis,
+                        informed screening decisions, access to care
+                        and voluntary blood donation for patients
+                        who need transfusions.
+                    </p>
+                </div>
+            </section>
+
+            <section class="info-card">
+                <h2>Be Part of the Change</h2>
+
+                <p>
+                    Learning about thalassemia is one way to support
+                    patients and their families. Share reliable
+                    information, encourage appropriate screening,
+                    and support authorised blood donation programmes.
+                </p>
+
+                <a href="index.html#awareness" class="page-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Awareness
+                </a>
+
+                <p class="disclaimer">
+                    Educational information only. This page does not
+                    replace diagnosis, treatment or advice from a
+                    qualified healthcare professional.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        © 2026 BloodCare. Every drop carries hope.
+    </footer>
+
+</body>
+</html>

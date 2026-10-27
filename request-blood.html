@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Blood | BloodCare</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #333;
+        }
+
+        header {
+            background: #b51224;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header h2 {
+            font-size: 25px;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 35px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #00000012;
+        }
+
+        .container h1 {
+            color: #b51224;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #b51224;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .validation-error {
+            display: block;
+            color: #c62828;
+            font-size: 13px;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        input.invalid {
+            border-color: #c62828;
+            background: #fffafa;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #b51224;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #8e0e1c;
+        }
+
+        .note {
+            background: #fff3f3;
+            padding: 12px;
+            border-left: 4px solid #b51224;
+            margin-bottom: 22px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 12px;
+                padding: 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>BloodCare</h2>
+    <nav>
+        <a href="/index.html">Back to home</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h1>Request Blood</h1>
+
+    <p class="description">
+        Fill in the details below to submit a blood request.
+        Please ensure that all information is correct.
+    </p>
+
+    <div class="note">
+        <strong>Important:</strong> Submitting a request does not
+        guarantee blood availability. Your request will initially
+        have a Pending status.
+    </div>
+
+    <form action="/submit-blood-request" method="POST">
+
+        <div class="form-group">
+            <label for="patient_name">Patient Name</label>
+            <input
+                type="text"
+                id="patient_name"
+                name="patient_name"
+                placeholder="Enter patient's full name"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@gmail.com"
+                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+                title="Enter a valid email address, e.g. name@gmail.com or name@yahoo.in"
+                aria-describedby="email-error"
+                required
+            >
+            <small id="email-error" class="validation-error" aria-live="polite"></small>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="blood_group">Blood Group</label>
+                <select id="blood_group" name="blood_group" required>
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="units">Units Required</label>
+                <input
+                    type="number"
+                    id="units"
+                    name="units"
+                    min="1"
+                    max="20"
+                    placeholder="Enter units"
+                    required
+                >
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="patient_gender">Patient Gender</label>
+            <select id="patient_gender" name="patient_gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+
+        
+        <div class="form-group">
+            <label for="state">State / Union Territory</label>
+            <select id="state" name="state" required>
+                <option value="">Select State / UT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City / Town</label>
+            <select id="city" name="city" required disabled>
+                <option value="">Select City / Town</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District</label>
+            <select id="district" name="district" required disabled>
+                <option value="">Select District</option>
+            </select>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="contact_phone">Contact Number</label>
+                <input
+                    type="tel"
+                    id="contact_phone"
+                    name="contact_phone"
+                    value="+91"
+                    pattern="\+91[6-9][0-9]{9}"
+                    minlength="13"
+                    maxlength="13"
+                    title="Enter exactly 10 digits after the fixed +91 prefix."
+                    inputmode="numeric"
+                    aria-describedby="phone-error"
+                    required
+                >
+                <small id="phone-error" class="validation-error" aria-live="polite"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="needed_by">Required By</label>
+                <input
+                    type="date"
+                    id="needed_by"
+                    name="needed_by"
+                    required
+                >
+            </div>
+        </div>
+
+        <button type="submit">Submit Blood Request</button>
+
+    </form>
+
+</div>
+
+
+<script>
+const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("contact_phone");
+const emailError = document.getElementById("email-error");
+const phoneError = document.getElementById("phone-error");
+const requestForm = document.querySelector('form[action="/submit-blood-request"]');
+
+function validateEmail(showMessage = true) {
+    const email = emailInput.value.trim();
+    // Accept normal email addresses with a domain suffix such as .com, .in, .org.
+    const emailPattern = /^[A-Za-z0-9]+(?:[._%+-][A-Za-z0-9]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/;
+    const valid = emailPattern.test(email);
+
+    emailInput.classList.toggle("invalid", !valid && email.length > 0);
+    emailInput.setCustomValidity(valid || email.length === 0
+        ? ""
+        : "Please enter a valid email address, e.g. name@gmail.com or name@yahoo.in.");
+
+    if (showMessage) {
+        emailError.textContent = valid || email.length === 0
+            ? ""
+            : "Please enter a valid email address (e.g. name@gmail.com, name@gmail.in, or name@yahoo.com).";
+    }
+    return valid;
+}
+
+function validatePhone(showMessage = true) {
+    const phone = phoneInput.value;
+    const valid = /^\+91[6-9][0-9]{9}$/.test(phone);
+
+    phoneInput.classList.toggle("invalid", !valid && phone.length > 3);
+    phoneInput.setCustomValidity(valid || phone === "+91"
+        ? ""
+        : "Please enter a valid 10-digit Indian mobile number after +91.");
+
+    if (showMessage) {
+        phoneError.textContent = valid || phone === "+91"
+            ? ""
+            : "Please enter exactly 10 digits after +91. The number must start with 6, 7, 8, or 9.";
+    }
+    return valid;
+}
+
+emailInput.addEventListener("input", () => validateEmail(true));
+emailInput.addEventListener("blur", () => validateEmail(true));
+
+phoneInput.addEventListener("input", function () {
+    // Keep +91 as the fixed prefix and permit at most 10 digits after it.
+    let digits = this.value.replace(/\D/g, "");
+    if (digits.startsWith("91")) {
+        digits = digits.slice(2);
+    }
+    digits = digits.slice(0, 10);
+    this.value = "+91" + digits;
+    validatePhone(true);
+});
+
+phoneInput.addEventListener("keydown", function (event) {
+    // Do not allow the fixed +91 prefix to be deleted.
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+    if ((event.key === "Backspace" && start <= 3 && end <= 3) ||
+        (event.key === "Delete" && start < 3)) {
+        event.preventDefault();
+    }
+});
+
+phoneInput.addEventListener("blur", () => validatePhone(true));
+
+requestForm.addEventListener("submit", function (event) {
+    const emailValid = validateEmail(true);
+    const phoneValid = validatePhone(true);
+    if (!emailValid || !phoneValid) {
+        event.preventDefault();
+        if (!emailValid) emailInput.focus();
+        else phoneInput.focus();
+    }
+});
+
+const stateSelect = document.getElementById("state");
+const districtSelect = document.getElementById("district");
+const citySelect = document.getElementById("city");
+
+const locationData = {
+    "Maharashtra": {
+        "Mumbai City": ["Mumbai"],
+        "Mumbai Suburban": ["Andheri", "Borivali", "Bandra"],
+        "Thane": ["Thane", "Kalyan", "Dombivli", "Ulhasnagar"],
+        "Pune": ["Pune", "Pimpri-Chinchwad", "Baramati"],
+        "Nashik": ["Nashik", "Malegaon", "Sinnar"],
+        "Nagpur": ["Nagpur", "Kamptee", "Hingna"],
+        "Kolhapur": ["Kolhapur", "Ichalkaranji", "Gadhinglaj"]
+    },
+    "Gujarat": {
+        "Ahmedabad": ["Ahmedabad", "Dholka", "Sanand"],
+        "Surat": ["Surat", "Bardoli", "Olpad"],
+        "Vadodara": ["Vadodara", "Dabhoi", "Padra"],
+        "Rajkot": ["Rajkot", "Gondal", "Jetpur"],
+        "Bhavnagar": ["Bhavnagar", "Palitana", "Mahuva"],
+        "Kutch": ["Bhuj", "Gandhidham", "Anjar"]
+    },
+    "Karnataka": {
+        "Bengaluru Urban": ["Bengaluru", "Yelahanka", "Anekal"],
+        "Mysuru": ["Mysuru", "Nanjangud", "Hunsur"],
+        "Belagavi": ["Belagavi", "Gokak", "Khanapur"],
+        "Dharwad": ["Hubballi", "Dharwad", "Kalghatgi"],
+        "Dakshina Kannada": ["Mangaluru", "Puttur", "Bantwal"],
+        "Shivamogga": ["Shivamogga", "Sagara", "Bhadravati"]
+    },
+    "Delhi": {
+        "New Delhi": ["New Delhi", "Connaught Place"],
+        "South Delhi": ["Saket", "Mehrauli", "Hauz Khas"],
+        "North Delhi": ["Civil Lines", "Model Town"],
+        "East Delhi": ["Preet Vihar", "Mayur Vihar"],
+        "West Delhi": ["Rajouri Garden", "Punjabi Bagh"],
+        "South West Delhi": ["Dwarka", "Najafgarh"]
+    },
+    "Rajasthan": {
+        "Jaipur": ["Jaipur", "Chomu", "Sanganer"],
+        "Jodhpur": ["Jodhpur", "Bilara", "Phalodi"],
+        "Udaipur": ["Udaipur", "Gogunda", "Mavli"],
+        "Kota": ["Kota", "Ramganj Mandi", "Sangod"],
+        "Ajmer": ["Ajmer", "Kishangarh", "Beawar"],
+        "Alwar": ["Alwar", "Bhiwadi", "Behror"]
+    }
+};
+
+function fillOptions(select, items, placeholder) {
+    select.innerHTML = "";
+    select.add(new Option(placeholder, ""));
+    items.forEach(item => select.add(new Option(item, item)));
+}
+
+fillOptions(stateSelect, Object.keys(locationData), "Select State / UT");
+
+stateSelect.addEventListener("change", function () {
+    const districts = Object.keys(locationData[this.value] || {});
+    fillOptions(districtSelect, districts, "Select District");
+    districtSelect.disabled = districts.length === 0;
+
+    fillOptions(citySelect, [], "Select City / Town");
+    citySelect.disabled = true;
+});
+
+districtSelect.addEventListener("change", function () {
+    const cities = locationData[stateSelect.value]?.[this.value] || [];
+    fillOptions(citySelect, cities, "Select City / Town");
+    citySelect.disabled = cities.length === 0;
+});
+</script>
+
+
+<footer>
+    © 2026 BloodCare | Every Drop Matters
+</footer>
+
+</body>
+</html>

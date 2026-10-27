@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Donor | BloodCare</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff5f5;
+            color: #333;
+        }
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px #00000010;
+        }
+
+        .logo {
+            color: #c62828;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        header a.home {
+            color: #c62828;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px #00000010;
+        }
+
+        h1 {
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: 1px solid #c62828;
+            border-color: #c62828;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #c62828;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #a71919;
+        }
+
+        .note {
+            background: #fff0f0;
+            padding: 12px;
+            border-radius: 8px;
+            color: #8b2222;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 14px;
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">BloodCare</a>
+    <a href="index.html" class="home">Back to Home</a>
+</header>
+
+<main class="container">
+    <h1>Become a Blood Donor</h1>
+
+    <p class="intro">
+        Complete your donor profile to help connect with people
+        who may need blood in your area.
+    </p>
+
+    <div class="note">
+        Please provide accurate information. Your eligibility and
+        availability must be confirmed according to blood-bank guidelines.
+    </div>
+
+    <form id="donorForm" action="/save-donor" method="POST" >
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name"
+                   value="{{ user.full_name }}" readonly required>
+        </div>
+
+        <div class="form-group">
+            <label for="bloodGroup">Blood Group</label>
+            <select id="bloodGroup" name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option value="A+" {{ "selected" if donor.get("blood_group") == "A+" else "" }}>A+</option>
+                <option value="A-" {{ "selected" if donor.get("blood_group") == "A-" else "" }}>A-</option>
+                <option value="B+" {{ "selected" if donor.get("blood_group") == "B+" else "" }}>B+</option>
+                <option value="B-" {{ "selected" if donor.get("blood_group") == "B-" else "" }}>B-</option>
+                <option value="O+" {{ "selected" if donor.get("blood_group") == "O+" else "" }}>O+</option>
+                <option value="O-" {{ "selected" if donor.get("blood_group") == "O-" else "" }}>O-</option>
+                <option value="AB+" {{ "selected" if donor.get("blood_group") == "AB+" else "" }}>AB+</option>
+                <option value="AB-" {{ "selected" if donor.get("blood_group") == "AB-" else "" }}>AB-</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age"
+                   min="18" max="65"
+                   value="{{ donor.get('age', '') or '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="state">State / Union Territory</label>
+            <select id="state" name="state" required>
+                <option value="">Select State / UT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City / Town</label>
+            <select id="city" name="city" required disabled>
+                <option value="">Select City / Town</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District</label>
+            <select id="district" name="district" required disabled>
+                <option value="">Select District</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone"
+                   value="{{ user.phone }}" readonly maxlength="15" required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Submit Donor Details
+        </button>
+
+    </form>
+</main>
+
+<footer>
+    © 2026 BloodCare | Every Donation Matters
+</footer>
+
+<script>
+    document.getElementById("donorForm").addEventListener("submit", function(event) {
+        const age = Number(document.getElementById("age").value);
+
+        if (age < 18 || age > 65) {
+            event.preventDefault();
+            alert("Please enter an age between 18 and 65.");
+        }
+    });
+</script>
+
+
+<script>
+const stateSelect = document.getElementById("state");
+const districtSelect = document.getElementById("district");
+const citySelect = document.getElementById("city");
+
+const locationData = {
+    "Maharashtra": {
+        "Mumbai City": ["Mumbai"],
+        "Mumbai Suburban": ["Andheri", "Borivali", "Bandra"],
+        "Thane": ["Thane", "Kalyan", "Dombivli", "Ulhasnagar"],
+        "Pune": ["Pune", "Pimpri-Chinchwad", "Baramati"],
+        "Nashik": ["Nashik", "Malegaon", "Sinnar"],
+        "Nagpur": ["Nagpur", "Kamptee", "Hingna"],
+        "Kolhapur": ["Kolhapur", "Ichalkaranji", "Gadhinglaj"]
+    },
+    "Gujarat": {
+        "Ahmedabad": ["Ahmedabad", "Dholka", "Sanand"],
+        "Surat": ["Surat", "Bardoli", "Olpad"],
+        "Vadodara": ["Vadodara", "Dabhoi", "Padra"],
+        "Rajkot": ["Rajkot", "Gondal", "Jetpur"],
+        "Bhavnagar": ["Bhavnagar", "Palitana", "Mahuva"],
+        "Kutch": ["Bhuj", "Gandhidham", "Anjar"]
+    },
+    "Karnataka": {
+        "Bengaluru Urban": ["Bengaluru", "Yelahanka", "Anekal"],
+        "Mysuru": ["Mysuru", "Nanjangud", "Hunsur"],
+        "Belagavi": ["Belagavi", "Gokak", "Khanapur"],
+        "Dharwad": ["Hubballi", "Dharwad", "Kalghatgi"],
+        "Dakshina Kannada": ["Mangaluru", "Puttur", "Bantwal"],
+        "Shivamogga": ["Shivamogga", "Sagara", "Bhadravati"]
+    },
+    "Delhi": {
+        "New Delhi": ["New Delhi", "Connaught Place"],
+        "South Delhi": ["Saket", "Mehrauli", "Hauz Khas"],
+        "North Delhi": ["Civil Lines", "Model Town"],
+        "East Delhi": ["Preet Vihar", "Mayur Vihar"],
+        "West Delhi": ["Rajouri Garden", "Punjabi Bagh"],
+        "South West Delhi": ["Dwarka", "Najafgarh"]
+    },
+    "Rajasthan": {
+        "Jaipur": ["Jaipur", "Chomu", "Sanganer"],
+        "Jodhpur": ["Jodhpur", "Bilara", "Phalodi"],
+        "Udaipur": ["Udaipur", "Gogunda", "Mavli"],
+        "Kota": ["Kota", "Ramganj Mandi", "Sangod"],
+        "Ajmer": ["Ajmer", "Kishangarh", "Beawar"],
+        "Alwar": ["Alwar", "Bhiwadi", "Behror"]
+    }
+};
+
+function fillOptions(select, items, placeholder) {
+    select.innerHTML = "";
+    select.add(new Option(placeholder, ""));
+
+    items.forEach(item => {
+        select.add(new Option(item, item));
+    });
+}
+
+// Load states when the page opens
+fillOptions(
+    stateSelect,
+    Object.keys(locationData),
+    "Select State / UT"
+);
+
+stateSelect.addEventListener("change", function () {
+    const districts = Object.keys(locationData[this.value] || {});
+
+    fillOptions(districtSelect, districts, "Select District");
+    districtSelect.disabled = districts.length === 0;
+
+    fillOptions(citySelect, [], "Select City / Town");
+    citySelect.disabled = true;
+});
+
+districtSelect.addEventListener("change", function () {
+    const cities =
+        locationData[stateSelect.value]?.[this.value] || [];
+
+    fillOptions(citySelect, cities, "Select City / Town");
+    citySelect.disabled = cities.length === 0;
+});
+</script>
+</body>
+</html>
+
+

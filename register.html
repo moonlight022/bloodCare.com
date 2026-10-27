@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | BloodCare</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f7f7f9;
+            color: #252525;
+        }
+
+        .register-hero {
+            background: linear-gradient(120deg, #8f101c, #d82936);
+            padding: 48px 20px 85px;
+            text-align: center;
+            color: white;
+        }
+
+        .register-hero .eyebrow {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .register-hero h1 {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        .register-hero p {
+            font-size: 14px;
+            margin: 0;
+            color: #ffe8e9;
+        }
+
+        .register-wrapper {
+            width: min(920px, 92%);
+            margin: -45px auto 55px;
+            display: grid;
+            grid-template-columns: 0.85fr 1.4fr;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 38px rgba(0, 0, 0, 0.10);
+        }
+
+        .register-info {
+            background: #fff0f1;
+            padding: 35px 27px;
+        }
+
+        .register-icon {
+            width: 62px;
+            height: 62px;
+            background: #c91f2b;
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 27px;
+            margin-bottom: 22px;
+        }
+
+        .register-info h2 {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .register-info p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .benefit {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-top: 23px;
+        }
+
+        .benefit i {
+            color: #c91f2b;
+            margin-top: 4px;
+        }
+
+        .benefit strong {
+            font-size: 13px;
+        }
+
+        .benefit small {
+            display: block;
+            color: #777;
+            font-size: 11px;
+            margin-top: 4px;
+            line-height: 1.6;
+        }
+
+        .register-form-area {
+            padding: 35px;
+        }
+
+        .form-heading h2 {
+            font-size: 23px;
+            margin: 0 0 7px;
+        }
+
+        .form-heading p {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 7px;
+            font: inherit;
+            font-size: 12px;
+            background: #fcfcfc;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #c91f2b;
+            background: white;
+        }
+
+        .terms {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            font-size: 11px;
+            color: #666;
+            margin: 20px 0;
+            line-height: 1.7;
+        }
+
+        .terms input {
+            margin-top: 4px;
+            accent-color: #c91f2b;
+        }
+
+        .register-btn {
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            padding: 13px;
+            color: white;
+            background: #c91f2b;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .register-btn:hover {
+            background: #a91520;
+            transform: translateY(-1px);
+        }
+
+        .login-note {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .login-note a {
+            color: #c91f2b;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        #formMessage {
+            font-size: 12px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .field-error {
+            color: #c91f2b;
+            font-size: 11px;
+            line-height: 1.4;
+            min-height: 0;
+        }
+
+        .input-invalid {
+            border-color: #c91f2b !important;
+            background: #fff7f7 !important;
+        }
+
+        .page-footer {
+            background: #211c1d;
+            color: #ddd;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        .page-footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .register-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .register-info {
+                padding: 25px;
+            }
+
+            .register-form-area {
+                padding: 25px 20px;
+            }
+
+            .register-hero h1 {
+                font-size: 27px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            Blood<span class="red-text">Care</span>
+        </a>
+
+        <a href="index.html" class="nav-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+    </header>
+
+    <section class="register-hero">
+        <p class="eyebrow">JOIN THE BLOODCARE COMMUNITY</p>
+        <h1>Create Your Account</h1>
+        <p>One small step can help make a lifesaving difference.</p>
+    </section>
+
+    <main class="register-wrapper">
+
+        <aside class="register-info">
+            <div class="register-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <h2>Be Someone's Hope.</h2>
+
+            <p>
+                Join BloodCare to connect with the blood donation
+                community and help people learn about lifesaving donation.
+            </p>
+
+            <div class="benefit">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                    <strong>Join the Community</strong>
+                    <small>Create your profile and get started.</small>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <div>
+                    <strong>Help People in Need</strong>
+                    <small>Explore donor and blood request features.</small>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <i class="fa-solid fa-shield-heart"></i>
+                <div>
+                    <strong>Your Details Matter</strong>
+                    <small>Provide accurate information when registering.</small>
+                </div>
+            </div>
+        </aside>
+
+        <section class="register-form-area">
+            <div class="form-heading">
+                <h2>Register Now</h2>
+                <p>Enter your details to create your BloodCare account.</p>
+            </div>
+
+            
+<form id="registerForm" action="/register" method="POST" novalidate>
+    <div class="form-grid">
+
+        <div class="form-group full-width">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname"
+                   placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"
+                   placeholder="Enter your email" maxlength="254" required
+                   aria-describedby="emailError">
+            <small class="field-error" id="emailError" aria-live="polite"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Mobile Number</label>
+            <input type="tel" id="phone" name="phone"
+                   placeholder="10-digit mobile number"
+                   inputmode="numeric" pattern="[6-9][0-9]{9}"
+                   minlength="10" maxlength="10" required
+                   aria-describedby="phoneError">
+            <small class="field-error" id="phoneError" aria-live="polite"></small>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="patient_gender">Patient Gender</label>
+            <select id="patient_gender" name="patient_gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+
+        
+        <div class="form-group">
+            <label for="state">State / Union Territory</label>
+            <select id="state" name="state" required>
+                <option value="">Select State / UT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City / Town</label>
+            <select id="city" name="city" required disabled>
+                <option value="">Select City / Town</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District</label>
+            <select id="district" name="district" required disabled>
+                <option value="">Select District</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                   placeholder="At least 8 characters"
+                   minlength="8" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword"
+                   name="confirmPassword"
+                   placeholder="Re-enter password" required>
+        </div>
+
+    </div>
+
+    <label class="terms">
+        <input type="checkbox" id="terms" name="terms"
+               value="yes" required>
+        <span>I confirm that my information is correct and agree
+        to the website's terms.</span>
+    </label>
+
+    <button type="submit" class="register-btn">
+        Create Account <i class="fa-solid fa-arrow-right"></i>
+    </button>
+
+    <p id="formMessage" role="status"></p>
+
+    <p class="login-note">
+        Already have an account?
+        <a href="login.html">Sign In</a>
+    </p>
+</form>
+
+        </section>
+
+    </main>
+
+    <footer class="page-footer">
+        © 2026 BloodCare. Every drop carries hope.
+        &nbsp; | &nbsp;
+        <a href="index.html">Back to Home</a>
+    </footer>
+
+    
+<script>
+    const form = document.getElementById("registerForm");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const emailError = document.getElementById("emailError");
+    const phoneError = document.getElementById("phoneError");
+    const formMessage = document.getElementById("formMessage");
+
+    function validateEmail() {
+        const value = emailInput.value.trim();
+        const emailPattern = /^[A-Za-z0-9]+(?:[._%+-][A-Za-z0-9]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/;
+        let message = "";
+        if (!value) message = "Please enter your email address.";
+        else if (value.length > 254 || !emailPattern.test(value)) message = "Enter a valid email address, e.g. name@gmail.com.";
+        emailError.textContent = message;
+        emailInput.classList.toggle("input-invalid", Boolean(message));
+        return !message;
+    }
+
+    function validatePhone() {
+        const value = phoneInput.value.trim();
+        let message = "";
+        if (!value) message = "Please enter your mobile number.";
+        else if (!/^[6-9][0-9]{9}$/.test(value)) message = "Enter a valid 10-digit Indian mobile number starting with 6–9.";
+        phoneError.textContent = message;
+        phoneInput.classList.toggle("input-invalid", Boolean(message));
+        return !message;
+    }
+
+    // Keep the number field numeric and limit it to 10 digits.
+    phoneInput.addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").slice(0, 10);
+        validatePhone();
+    });
+    emailInput.addEventListener("input", validateEmail);
+    emailInput.addEventListener("blur", validateEmail);
+    phoneInput.addEventListener("blur", validatePhone);
+
+    form.addEventListener("submit", function(event) {
+        formMessage.textContent = "";
+        const emailValid = validateEmail();
+        const phoneValid = validatePhone();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!emailValid || !phoneValid) {
+            event.preventDefault();
+            return;
+        }
+
+        // Preserve required-field and other built-in checks despite novalidate.
+        const requiredFields = Array.from(form.querySelectorAll("[required]"));
+        const invalidRequired = requiredFields.find(field => !field.checkValidity());
+        if (invalidRequired) {
+            event.preventDefault();
+            invalidRequired.reportValidity();
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            event.preventDefault();
+            formMessage.style.color = "#c91f2b";
+            formMessage.textContent = "Passwords do not match.";
+        }
+    });
+</script>
+
+
+<script>
+const stateSelect = document.getElementById("state");
+const districtSelect = document.getElementById("district");
+const citySelect = document.getElementById("city");
+
+const locationData = {
+    "Maharashtra": {
+        "Mumbai City": ["Mumbai"],
+        "Mumbai Suburban": ["Andheri", "Borivali", "Bandra"],
+        "Thane": ["Thane", "Kalyan", "Dombivli", "Ulhasnagar"],
+        "Pune": ["Pune", "Pimpri-Chinchwad", "Baramati"],
+        "Nashik": ["Nashik", "Malegaon", "Sinnar"],
+        "Nagpur": ["Nagpur", "Kamptee", "Hingna"],
+        "Kolhapur": ["Kolhapur", "Ichalkaranji", "Gadhinglaj"]
+    },
+    "Gujarat": {
+        "Ahmedabad": ["Ahmedabad", "Dholka", "Sanand"],
+        "Surat": ["Surat", "Bardoli", "Olpad"],
+        "Vadodara": ["Vadodara", "Dabhoi", "Padra"],
+        "Rajkot": ["Rajkot", "Gondal", "Jetpur"],
+        "Bhavnagar": ["Bhavnagar", "Palitana", "Mahuva"],
+        "Kutch": ["Bhuj", "Gandhidham", "Anjar"]
+    },
+    "Karnataka": {
+        "Bengaluru Urban": ["Bengaluru", "Yelahanka", "Anekal"],
+        "Mysuru": ["Mysuru", "Nanjangud", "Hunsur"],
+        "Belagavi": ["Belagavi", "Gokak", "Khanapur"],
+        "Dharwad": ["Hubballi", "Dharwad", "Kalghatgi"],
+        "Dakshina Kannada": ["Mangaluru", "Puttur", "Bantwal"],
+        "Shivamogga": ["Shivamogga", "Sagara", "Bhadravati"]
+    },
+    "Delhi": {
+        "New Delhi": ["New Delhi", "Connaught Place"],
+        "South Delhi": ["Saket", "Mehrauli", "Hauz Khas"],
+        "North Delhi": ["Civil Lines", "Model Town"],
+        "East Delhi": ["Preet Vihar", "Mayur Vihar"],
+        "West Delhi": ["Rajouri Garden", "Punjabi Bagh"],
+        "South West Delhi": ["Dwarka", "Najafgarh"]
+    },
+    "Rajasthan": {
+        "Jaipur": ["Jaipur", "Chomu", "Sanganer"],
+        "Jodhpur": ["Jodhpur", "Bilara", "Phalodi"],
+        "Udaipur": ["Udaipur", "Gogunda", "Mavli"],
+        "Kota": ["Kota", "Ramganj Mandi", "Sangod"],
+        "Ajmer": ["Ajmer", "Kishangarh", "Beawar"],
+        "Alwar": ["Alwar", "Bhiwadi", "Behror"]
+    }
+};
+
+function fillOptions(select, items, placeholder) {
+    select.innerHTML = "";
+    select.add(new Option(placeholder, ""));
+    items.forEach(item => select.add(new Option(item, item)));
+}
+
+fillOptions(stateSelect, Object.keys(locationData), "Select State / UT");
+
+stateSelect.addEventListener("change", function () {
+    const districts = Object.keys(locationData[this.value] || {});
+    fillOptions(districtSelect, districts, "Select District");
+    districtSelect.disabled = districts.length === 0;
+
+    fillOptions(citySelect, [], "Select City / Town");
+    citySelect.disabled = true;
+});
+
+districtSelect.addEventListener("change", function () {
+    const cities = locationData[stateSelect.value]?.[this.value] || [];
+    fillOptions(citySelect, cities, "Select City / Town");
+    citySelect.disabled = cities.length === 0;
+});
+</script>
+
+</body>
+</html>
